@@ -154,7 +154,7 @@ cython_debug/
 Thumbs.db
 .DS_Store
 
-# Project specific
+# Project specific - SDP API
 uploads/
 temp/
 tmp/
@@ -163,4 +163,30 @@ tmp/
 *.doc
 *.xlsx
 *.xls
+
+# Keep uploads directory structure but ignore contents
+uploads/*
+!uploads/.gitkeep
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# FastAPI / Uvicorn
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OCR temporary files
+*.tesseract
+ocr_temp/
+
+# AI model cache
+.ai_cache/
+model_cache/
 
