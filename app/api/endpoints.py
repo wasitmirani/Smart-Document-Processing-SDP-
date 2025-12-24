@@ -22,7 +22,7 @@ async def upload_document(
     perform_ocr: bool = False,
     extract_entities: bool = False,
     classify_document: bool = False,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Upload and process a document"""
     # Validate file type
@@ -65,8 +65,8 @@ async def upload_document(
 
 @router.post("/extract", response_model=ExtractionResult)
 async def extract_from_document(
-    request: ExtractionRequest,
-    current_user: User = Depends(get_current_user)
+    request: ExtractionRequest
+    # current_user: User = Depends(get_current_user)
 ):
     """Extract information from already uploaded document"""
     document = processor.get_document(request.document_id)
@@ -97,7 +97,7 @@ async def extract_from_document(
 async def batch_process_documents(
     request: BatchProcessingRequest,
     background_tasks: BackgroundTasks,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Process multiple documents in batch"""
     batch_id = str(uuid.uuid4())
@@ -127,7 +127,7 @@ async def batch_process_documents(
 async def list_documents(
     skip: int = 0,
     limit: int = 100,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """List all processed documents"""
     return processor.list_documents(skip=skip, limit=limit)
@@ -135,7 +135,7 @@ async def list_documents(
 @router.get("/documents/{document_id}", response_model=Document)
 async def get_document(
     document_id: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Get document by ID"""
     document = processor.get_document(document_id)
@@ -146,7 +146,7 @@ async def get_document(
 @router.get("/documents/{document_id}/text")
 async def get_document_text(
     document_id: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Get extracted text from document"""
     document = processor.get_document(document_id)
@@ -159,7 +159,7 @@ async def get_document_text(
 @router.get("/documents/{document_id}/entities")
 async def get_document_entities(
     document_id: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Get entities extracted from document"""
     document = processor.get_document(document_id)
@@ -172,7 +172,7 @@ async def get_document_entities(
 @router.get("/documents/{document_id}/download")
 async def download_document(
     document_id: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Download original document"""
     document = processor.get_document(document_id)
@@ -188,7 +188,7 @@ async def download_document(
 @router.post("/classify")
 async def classify_text(
     text: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Classify text content"""
     from app.services.ai_processor import AIProcessor
@@ -199,7 +199,7 @@ async def classify_text(
 @router.post("/extract-entities")
 async def extract_entities_from_text(
     text: str,
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
     """Extract entities from text"""
     from app.services.ai_processor import AIProcessor
